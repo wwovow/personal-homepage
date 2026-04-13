@@ -22,3 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
     }
 });
+
+// 翻牌效果
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', function() {
+    this.classList.toggle('flipped');
+  });
+});

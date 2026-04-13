@@ -46,7 +46,7 @@ const responses = {
   你叫什么: `你可以叫我 ${botInfo.name} ✨`,
   你现在做得怎么样了: `其实还可以啦！现在主要在${botInfo.doing}，在学做这个主页呢～`,
   你在做什么: `${botInfo.doing}`,
-  你的联系方式: `嗯...现在还在搭建中呢，可以通过主页找到我～`,
+  联系: `你能到这儿来跟我对话，那你肯定知道我的联系方式呀ww`,
   你擅长什么: `我${botInfo.skills}`,
   你的兴趣: `我喜欢${botInfo.interests}`,
   你的特点: `${botInfo.trait}`,
@@ -104,4 +104,21 @@ messageInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     sendMessage();
   }
+});
+
+// 快速按钮功能
+const quickButtons = document.querySelectorAll('.quick-btn');
+quickButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const question = btn.getAttribute('data-question');
+    messageInput.value = question;
+    sendMessage();
+    
+    // 平滑消失动画
+    btn.style.transition = 'opacity 0.3s ease-out';
+    btn.style.opacity = '0';
+    setTimeout(() => {
+      btn.style.display = 'none';
+    }, 300);
+  });
 });

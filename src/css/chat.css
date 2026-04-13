@@ -1,12 +1,20 @@
 #chat-window {
     background: linear-gradient(to bottom, #f8fbfe 0%, #f0f6ff 100%);
     border: 2px solid #d4c5e2;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 16px;
     height: 500px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 16px rgba(168, 216, 234, 0.2);
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 35px,
+            rgba(212, 197, 226, 0.05) 35px,
+            rgba(212, 197, 226, 0.05) 36px
+        );
 }
 
 #messages {
@@ -16,27 +24,72 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding: 8px 0;
 }
 
 .message {
     padding: 10px 14px;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 13px;
     line-height: 1.5;
-    max-width: 90%;
+    max-width: 85%;
     word-wrap: break-word;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .user-message {
     align-self: flex-end;
     background: #a8d8ea;
     color: white;
+    border-radius: 12px 12px 4px 12px;
 }
 
 .bot-message {
     align-self: flex-start;
     background: #f0f0f0;
     color: #666;
+    border-radius: 12px 12px 12px 4px;
+}
+
+.quick-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.quick-btn {
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #e8f4f8 0%, #ddf0f7 100%);
+    color: #7db8d4;
+    border: 1px solid #c9d9e3;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.quick-btn:hover {
+    background: linear-gradient(135deg, #d8ecf5 0%, #cde8f0 100%);
+    border-color: #a8d8ea;
+    transform: translateY(-2px);
+}
+
+.quick-btn:active {
+    transform: translateY(0);
 }
 
 .chat-input-group {
@@ -48,7 +101,7 @@
     flex: 1;
     padding: 10px 12px;
     border: 1px solid #c9d9e3;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 13px;
     font-family: inherit;
     background: white;
@@ -65,7 +118,7 @@
     background: linear-gradient(135deg, #a8d8ea 0%, #98c9e3 100%);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s;
@@ -85,4 +138,13 @@
     #chat-window {
         height: 350px;
     }
+    
+    .message {
+        max-width: 90%;
+    }
+}
+
+#message-input::placeholder {
+    color: #a8d8ea;
+    font-weight: 500;
 }
