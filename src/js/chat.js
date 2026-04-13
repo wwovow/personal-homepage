@@ -25,3 +25,83 @@ document.addEventListener('DOMContentLoaded', function() {
         chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
     }
 });
+
+const chatMessages = document.getElementById('messages');
+const messageInput = document.getElementById('message-input');
+const sendButton = document.getElementById('send-button');
+
+// 数字分身的信息库
+const botInfo = {
+  name: '昀',
+  identity: '是人类',
+  doing: '学怎么vibe！',
+  skills: '擅长提出各种建议（能不能实现是另一个问题），比较关心功能实现',
+  interests: '看书、画画、听歌、学AI',
+  trait: '非常跳脱ovo'
+};
+
+// 常见问题的回答
+const responses = {
+  你是谁: `我是 ${botInfo.name}，${botInfo.identity}～`,
+  你叫什么: `你可以叫我 ${botInfo.name} ✨`,
+  你现在做得怎么样了: `其实还可以啦！现在主要在${botInfo.doing}，在学做这个主页呢～`,
+  你在做什么: `${botInfo.doing}`,
+  你的联系方式: `嗯...现在还在搭建中呢，可以通过主页找到我～`,
+  你擅长什么: `我${botInfo.skills}`,
+  你的兴趣: `我喜欢${botInfo.interests}`,
+  你的特点: `${botInfo.trait}`,
+  你好: `你好呀！很高兴认识你～😊`,
+  hi: `hey~ 有什么想聊的吗？`,
+  默认: `嗯...这个问题有点难呢，试试问我"你是谁"、"你现在做得怎么样了"或"你的联系方式"吧～`
+};
+
+// 添加消息到聊天窗口
+function addMessage(text, isUser) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+  messageDiv.textContent = text;
+  chatMessages.appendChild(messageDiv);
+  
+  // 自动滚到最下面
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// 获取机器人的回复
+function getBotReply(userMessage) {
+  const lowerMessage = userMessage.toLowerCase().trim();
+  
+  // 精确匹配
+  for (let key in responses) {
+    if (lowerMessage.includes(key)) {
+      return responses[key];
+    }
+  }
+  
+  // 如果没有匹配，返回默认回复
+  return responses['默认'];
+}
+
+// 发送消息
+function sendMessage() {
+  const message = messageInput.value.trim();
+  
+  if (message === '') return;
+  
+  // 添加用户消息
+  addMessage(message, true);
+  messageInput.value = '';
+  
+  // 延迟显示机器人回复（更自然）
+  setTimeout(() => {
+    const botReply = getBotReply(message);
+    addMessage(botReply, false);
+  }, 300);
+}
+
+// 绑定事件
+sendButton.addEventListener('click', sendMessage);
+messageInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+});
