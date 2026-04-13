@@ -1,0 +1,22 @@
+{
+  "name": "personal-homepage",
+  "version": "1.0.0",
+  "description": "A personal homepage project with a digital avatar chat area.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build step can be added here.'"
+  },
+  "keywords": [
+    "personal",
+    "homepage",
+    "chat",
+    "digital avatar"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "vitest": "^4.1.4"
+  }
+}
