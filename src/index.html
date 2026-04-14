@@ -17,60 +17,81 @@
             <p class="tagline">正在学各种各样东西的（？）</p>
         </header>
 
-        <div class="container">
-            <section id="about" class="left-panel">
-                <h2>关于我</h2>
-                <div class="flip-card" data-info="doing">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>现在在做</h3>
-                            <p>👆 点我</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>是的如你所见我在学做这个东西</p>
-                        </div>
-                    </div>
+  <div class="container">
+    <!-- 左侧：关于我（四个小正方形） -->
+    <section id="about" class="left-panel">
+    <h2>关于我</h2>
+    
+    <div class="flip-grid">
+        <!-- 卡片1 -->
+        <div class="flip-card small" data-info="doing">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>现在在做</h3>
                 </div>
-                <div class="flip-card" data-info="interests">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>我的兴趣</h3>
-                            <p>👆 点我</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>看书、画画、听歌、现在还有这个（学ai？）</p>
-                        </div>
-                    </div>
+                <div class="flip-card-back">
+                    <p><strong>是的如你所见我在学做这个东西</strong></p>
                 </div>
-                <div class="flip-card" data-info="trait">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>我的特点</h3>
-                            <p>👆 点我</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>嗯非常跳脱ovo</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <aside id="chat" class="right-panel">
-                <h2>Try try 👇</h2>
-                <div id="chat-window">
-                    <div id="messages"></div>
-                    <div class="quick-buttons">
-                        <button class="quick-btn" data-question="你是谁">你是谁？</button>
-                        <button class="quick-btn" data-question="你现在做得怎么样了">做得怎么样了？</button>
-                        <button class="quick-btn" data-question="你的联系方式">联系方式</button>
-                    </div>
-                    <div class="chat-input-group">
-                        <input type="text" id="message-input" placeholder="快来发现意想不到的小惊喜ww">
-                        <button id="send-button">→</button>
-                    </div>
-                </div>
-            </aside>
+            </div>
         </div>
+
+        <!-- 卡片2 -->
+        <div class="flip-card small" data-info="interests">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>我的兴趣</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p><strong>看书、画画、听歌、现在还有这个（学AI？）</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片3 -->
+        <div class="flip-card small" data-info="trait">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>我的特点</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p><strong>嗯非常跳脱 ovo</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片4 -->
+        <div class="flip-card small" data-info="secret">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>???</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p><strong>OvO 你找到我啦</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- 右侧：聊天区（保持不变） -->
+    <aside id="chat" class="right-panel">
+        <h2>Try try 👇</h2>
+        <div id="chat-window">
+            <div id="messages"></div>
+            
+            <div class="quick-buttons">
+                <button class="quick-btn" data-question="你是谁">你是谁？</button>
+                <button class="quick-btn" data-question="你现在做得怎么样了">做得怎么样了？</button>
+                <button class="quick-btn" data-question="你的联系方式">联系方式</button>
+            </div>
+
+            <div class="chat-input-group">
+                <input type="text" id="message-input" placeholder="快来发现意想不到的小surprise ww">
+                <button id="send-button">→</button>
+            </div>
+        </div>
+    </aside>
+</div>
     </main>
 
     <footer>
