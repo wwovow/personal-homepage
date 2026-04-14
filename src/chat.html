@@ -10,7 +10,7 @@
     <div class="phone-frame">
         <!-- 手机顶部状态栏 -->
         <div class="phone-header">
-            <div class="time">19:88</div>
+            <div class="time">23:33</div>
             <div class="status-icons">◉◉◉</div>
         </div>
 
@@ -26,10 +26,17 @@
             </div>
         </div>
 
-        <!-- 聊天消息区域 -->
-        <div id="chat-window" class="chat-window">
-            <div id="messages"></div>
-        </div>
+        <!-- 消息区域 -->
+<div id="chat-window" class="chat-window">
+    <div id="messages"></div>
+    
+    <!-- 快速提问按钮 -->
+    <div class="quick-buttons" id="quick-buttons">
+        <button class="quick-btn" data-question="你是谁">你是谁？</button>
+        <button class="quick-btn" data-question="你现在做得怎么样了">做得怎么样了？</button>
+        <button class="quick-btn" data-question="该怎么联系你">该怎么联系你？</button>
+    </div>
+</div>
 
         <!-- 输入栏 -->
         <div class="chat-input-area">
@@ -40,4 +47,11 @@
 
     <script src="js/chat.js"></script>
 </body>
+
+<script>
+document.getElementById('back-btn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+</script>
+
 </html>

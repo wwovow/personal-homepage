@@ -1,3 +1,4 @@
+/* ==================== 手机聊天页面 - 最终舒服贴边版 ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -5,32 +6,35 @@
 }
 
 body {
-    background: #1a1a2e;
-    font-family: 'Microsoft YaHei', sans-serif;
+    background: #f8f4ff;
+    font-family: 'Microsoft YaHei', system-ui, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    background-image: url('../assets/chat-bg3.png');
+    background-size: cover;
+    background-position: center;
 }
 
-/* 手机外框（粉色像素风） */
+/* 手机外框 - 小一丢丢 */
 .phone-frame {
-    width: 380px;
-    height: 720px;
-    background: #fff0f5;
-    border: 14px solid #ff99cc;
+    width: 360px;
+    height: 680px;
+    background: #f8f4ff;
+    border: 12px solid #9bb3c6;
     border-radius: 48px;
-    box-shadow: 0 0 0 12px #000000,
-                0 0 0 18px #ff66aa;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
     position: relative;
+    margin: 30px auto;
 }
 
 /* 状态栏 */
 .phone-header {
     height: 38px;
-    background: #ff99cc;
+    background: linear-gradient(to right, #dbdbdb, #c8b0e073);
     color: white;
     display: flex;
     justify-content: space-between;
@@ -41,60 +45,101 @@ body {
 
 /* 聊天标题栏 */
 .chat-title {
-    height: 70px;
-    background: #ff99cc;
+    height: 68px;
+    background: linear-gradient(to right, #d4b8c7, #4b5662);
     display: flex;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 16px;
     gap: 12px;
-    color: white;
 }
 
 .chat-avatar img {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    border: 3px solid white;
+    border: 3px solid rgb(170, 190, 220);
 }
 
 .chat-title h2 {
     font-size: 18px;
+    color: rgb(255, 255, 255);
 }
 
 .chat-title p {
-    font-size: 12px;
-    opacity: 0.9;
+    font-size: 12.5px;
+    color: rgba(118, 255, 105, 0.9);
 }
 
 /* 消息区域 */
 .chat-window {
-    height: calc(100% - 178px);
-    background: #fffaf5;
-    padding: 20px 15px;
+    height: calc(100% - 176px);
+    background: linear-gradient(to bottom, #f8fbfe 0%, #f0f6ff 100%);
+    padding: 24px 18px 80px;   /* 底部留更多空间给按钮 */
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;                 /* 消息上下间隔加大 */
+    scrollbar-width: none;
+}
+
+.chat-window::-webkit-scrollbar {
+    display: none;
 }
 
 .message {
-    margin-bottom: 18px;
-    max-width: 80%;
-    padding: 12px 16px;
+    padding: 12px 17px;
     border-radius: 18px;
-    line-height: 1.5;
+    line-height: 1.55;
     font-size: 15px;
+    max-width: 82%;
+    word-wrap: break-word;
+    animation: slideIn 0.3s ease-out;
+    width: fit-content;        /* 关键：根据文字长度自动调整宽度 */
 }
 
-.user-message {
-    align-self: flex-end;
-    background: #ff99cc;
-    color: white;
-    border-radius: 18px 18px 4px 18px;
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .bot-message {
     align-self: flex-start;
-    background: #f0e0ff;
-    color: #333;
-    border-radius: 18px 18px 18px 4px;
+    background: #f0f0ff;
+    color: #555;
+    border-radius: 18px 18px 18px 6px;
+    margin-right: auto;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: #a8d8ea;
+    color: white;
+    border-radius: 18px 18px 6px 18px;
+    margin-left: auto;
+}
+
+/* 快速按钮 - 强行贴在输入框正上方 */
+.quick-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 6px 6px 6px;     /* 非常贴近输入框 */
+}
+
+.quick-btn {
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #e8f4f8, #ddf0f7);
+    color: #7db8d4;
+    border: 1px solid #c9d9e3;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 13.5px;
+    transition: all 0.25s;
+}
+
+.quick-btn:hover {
+    background: linear-gradient(135deg, #d8ecf5, #cde8f0);
+    transform: translateY(-1px);
 }
 
 /* 输入栏 */
@@ -103,28 +148,30 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 70px;
-    background: #ff99cc;
+    height: 72px;
+    background: #f0f6ff;
     display: flex;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 14px;
     gap: 10px;
+    border-top: 2px solid #d4c5e2;
 }
 
 #message-input {
     flex: 1;
     height: 46px;
-    border: none;
+    border: 1px solid #c9d9e3;
     border-radius: 30px;
     padding: 0 18px;
-    font-size: 15px;
+    font-size: 14.8px;
+    background: white;
 }
 
 #send-button {
-    width: 46px;
-    height: 46px;
-    background: white;
-    color: #ff3399;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #a8d8ea, #98c9e3);
+    color: white;
     border: none;
     border-radius: 50%;
     font-size: 18px;
