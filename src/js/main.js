@@ -1,31 +1,43 @@
-// This file contains the main JavaScript logic for the personal homepage, handling interactions and events.
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnPause = document.getElementById('btn-pause');
 
-document.addEventListener('DOMContentLoaded', function() {
-    const chatButton = document.getElementById('chat-button');
-    const chatInput = document.getElementById('chat-input');
-    const chatWindow = document.getElementById('chat-window');
+    const leftPanel = document.getElementById('left-panel');
+    const rightPanel = document.getElementById('right-panel');
+    const toastContainer = document.getElementById('toast-container');
 
-    chatButton.addEventListener('click', function() {
-        const message = chatInput.value;
-        if (message.trim() !== '') {
-            addMessageToChat('You: ' + message);
-            chatInput.value = '';
-            // Here you can call a function to send the message to the server or handle it as needed
-        }
+    // 左侧关于我
+    btnLeft.addEventListener('click', () => {
+        leftPanel.classList.add('show');
+        rightPanel.classList.remove('show');
     });
 
-    function addMessageToChat(message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.textContent = message;
-        chatWindow.appendChild(messageElement);
-        chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
-    }
-});
+    // 右侧聊天邀请
+    btnRight.addEventListener('click', () => {
+        rightPanel.classList.add('show');
+        leftPanel.classList.remove('show');
+    });
 
-// 翻牌效果
-document.querySelectorAll('.flip-card').forEach(card => {
-  card.addEventListener('click', function() {
-    this.classList.toggle('flipped');
-  });
+    // 返回按钮
+    document.getElementById('return-left').addEventListener('click', () => {
+        leftPanel.classList.remove('show');
+    });
+
+    document.getElementById('return-right').addEventListener('click', () => {
+        rightPanel.classList.remove('show');
+    });
+
+    // 暂停按钮 - 飘字
+    btnPause.addEventListener('click', () => {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = '别碰我 qvq';
+        toastContainer.appendChild(toast);
+
+        // 3.5秒后自动移除
+        setTimeout(() => {
+            toast.remove();
+        }, 4000);
+    });
 });
