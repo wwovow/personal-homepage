@@ -28,56 +28,72 @@
             <button id="btn-right" class="control-btn" title="数字分身">→</button>
         </div>
 
-        <!-- 左侧面板：毛玻璃 + 黑板擦 -->
-<div id="left-panel" class="side-panel left glass-panel">
-    <h2>关于我</h2>
-            
-            <div class="flip-grid">
-                <div class="flip-card small" data-info="doing">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><h3>现在在做</h3></div>
-                        <div class="flip-card-back"><p><strong>是的如你所见我在学做这个东西</strong></p></div>
-                    </div>
-                </div>
-                <div class="flip-card small" data-info="interests">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><h3>我的兴趣</h3></div>
-                        <div class="flip-card-back"><p><strong>看书、画画、听歌、现在还有这个（学AI？）</strong></p></div>
-                    </div>
-                </div>
-                <div class="flip-card small" data-info="trait">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><h3>我的特点</h3></div>
-                        <div class="flip-card-back"><p><strong>嗯非常跳脱 ovo</strong></p></div>
-                    </div>
-                </div>
-                <div class="flip-card small" data-info="secret">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front"><h3>???</h3></div>
-                        <div class="flip-card-back"><p><strong>OvO 你找到我啦</strong></p></div>
-                    </div>
-                </div>
-            </div>
+        <!-- 歪着的猫爪（放在左箭头左下角） -->
+        <div class="cat-paw-wrapper">
+             <div id="cat-paw" class="cat-paw">🐾</div>
         </div>
 
-        <!-- 底部置物栏 + 黑板擦 -->
-    <div class="eraser-shelf">
-        <div id="eraser" class="eraser">🧼</div>
-        <p class="shelf-label">黑板擦</p>
+        <!-- 左侧面板（独立毛玻璃方块） -->
+<div id="left-panel" class="side-panel left glass-panel">
+    <h2>关于我</h2>
+    
+    <div class="flip-grid">
+        <div class="flip-card small" data-info="doing">
+            <div class="flip-card-inner">
+                <div class="flip-card-front"><h3>现在在做</h3></div>
+                <div class="flip-card-back"><p><strong>是的如你所见我在学做这个东西</strong></p></div>
+            </div>
+        </div>
+        <div class="flip-card small" data-info="interests">
+            <div class="flip-card-inner">
+                <div class="flip-card-front"><h3>我的兴趣</h3></div>
+                <div class="flip-card-back"><p><strong>看书、画画、听歌、现在还有这个（学AI？）</strong></p></div>
+            </div>
+        </div>
+        <div class="flip-card small" data-info="trait">
+            <div class="flip-card-inner">
+                <div class="flip-card-front"><h3>我的特点</h3></div>
+                <div class="flip-card-back"><p><strong>嗯非常跳脱 ovo</strong></p></div>
+            </div>
+        </div>
+        <div class="flip-card small" data-info="secret">
+            <div class="flip-card-inner">
+                <div class="flip-card-front"><h3>???</h3></div>
+                <div class="flip-card-back"><p><strong>OvO 你找到我啦</strong></p></div>
+            </div>
+        </div>
     </div>
 </div>
 
-        <!-- 右侧面板：聊天邀请 -->
-        <div id="right-panel" class="side-panel right">
-            <button class="return-btn" id="return-right">想回去康康？点这里！</button>
-            <div class="chat-invite">
-                <h2>要不要跟“我”唠唠嗑！ww</h2>
-                <div class="invite-buttons">
-                    <button class="invite-yes">要！</button>
-                    <button class="invite-no">再等等w</button>
-                </div>
-            </div>
+        <!-- 右侧面板容器 -->
+<div id="right-panel" class="side-panel right">
+
+    <!-- 邀请界面（第一层） -->
+    <div id="invite-screen" class="invite-screen">
+        <h2>要不要跟“我”唠唠嗑！ww</h2>
+        <div class="invite-buttons">
+            <button id="invite-yes" class="invite-yes">要！</button>
+            <button id="invite-no" class="invite-no">再等等w</button>
         </div>
+    </div>
+
+    <!-- 真正的聊天界面（第二层，初始隐藏） -->
+    <div id="chat-screen" class="chat-screen" style="display: none;">
+        <div class="chat-header">
+            <h2>数字分身 · 昀</h2>
+            <button id="close-chat" class="close-chat-btn">×</button>
+        </div>
+        
+        <div id="chat-window">
+            <div id="messages"></div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="message-input" placeholder="快来跟我说点什么吧 ww">
+            <button id="send-button">→</button>
+        </div>
+    </div>
+</div>
 
         <!-- 暂停提示飘字容器 -->
         <div id="toast-container"></div>

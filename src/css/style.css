@@ -98,49 +98,7 @@ body {
     font-size: 28px;
 }
 
-/* 侧边面板 */
-.side-panel {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 380px;
-    background: rgba(255,255,255,0.92);
-    box-shadow: 0 0 40px rgba(120,140,200,0.25);
-    padding: 100px 30px 40px;
-    display: none;
-    flex-direction: column;
-    overflow-y: auto;
-    z-index: 10;
-}
-
-.side-panel.left { left: 0; border-radius: 0 20px 20px 0; }
-.side-panel.right { right: 0; border-radius: 20px 0 0 20px; }
-
-.side-panel.show {
-    display: flex;
-}
-
-/* 返回按钮 */
-.return-btn {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    background: none;
-    border: 1px solid #c0c0e0;
-    color: #888;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s;
-}
-
-.return-btn:hover {
-    background: #f0e6ff;
-    color: #7a9ac9;
-}
-
-/* 翻牌网格（保持你之前的大小） */
+/* ==================== 翻牌（带 duangduang hover） ==================== */
 .flip-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -148,159 +106,215 @@ body {
     margin-top: 20px;
 }
 
-.flip-card.small {
-    aspect-ratio: 1 / 1;
-    max-width: 125px;
+.flip-card {
+    perspective: 1000px;
     cursor: pointer;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(168, 216, 234, 0.25);
+    width: 100%;
+    max-width: 125px;
+    aspect-ratio: 1 / 1;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.flip-card.small .flip-card-inner,
-.flip-card.small .flip-card-front,
-.flip-card.small .flip-card-back {
+.flip-card:hover {
+    transform: scale(1.08) translateY(-6px);
+    box-shadow: 0 15px 30px rgba(168, 216, 234, 0.4);
+}
+
+.flip-card-inner {
+    position: relative;
     width: 100%;
     height: 100%;
+    transition: transform 0.65s;
+    transform-style: preserve-3d;
 }
 
-.flip-card.small .flip-card-front,
-.flip-card.small .flip-card-back {
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, 
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 12px;
+    border-radius: 12px;
 }
 
-/* 右侧邀请窗口 */
-.chat-invite {
-    text-align: center;
-    margin-top: 60px;
+.flip-card-front {
+    background: linear-gradient(135deg, #f8f4ff, #f0e8ff);
+}
+
+.flip-card-back {
+    background: linear-gradient(135deg, #e8f0ff, #d8e8ff);
+    transform: rotateY(180deg);
+}
+
+.flip-card-front h3 {
+    font-size: 13.5px;
+    color: #6b7eb3;
+}
+
+.flip-card-back p {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* ==================== 左侧毛玻璃面板 ==================== */
+.glass-panel {
+    position: absolute;
+    left: 80px;
+    top: 160px;
+    width: 380px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 24px;
+    box-shadow: 0 20px 45px rgba(130, 150, 210, 0.25);
+    padding: 35px 28px 40px;
+    display: none;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.glass-panel.show {
+    display: flex;
+}
+
+/* ==================== 歪着的小猫爪（放在左箭头左下角） ==================== */
+.cat-paw-wrapper {
+    position: absolute;
+    left: 360px;     /* 调整这个数值可以左右移动 */
+    bottom: 85px;    /* 调整这个数值可以上下移动 */
+    z-index: 25;
+}
+
+.cat-paw {
+    font-size: 48px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    transform: rotate(-25deg);   /* 歪着摆放 */
+    user-select: none;
+}
+
+.cat-paw:hover {
+    transform: rotate(-10deg) scale(1.35);
+    filter: drop-shadow(0 10px 15px rgba(255, 180, 200, 0.7));
+}
+
+.cat-paw:active {
+    transform: rotate(-40deg) scale(0.85);
+}
+
+.paw-label {
+    font-size: 13px;
+    color: #b38cc6;
+    letter-spacing: 1px;
+}
+
+/* 面板被拍飞动画 */
+.glass-panel.paw-away {
+    animation: pawFlyAway 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes pawFlyAway {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg) translateY(0);
+    }
+    40% {
+        transform: scale(1.05) rotate(8deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.6) rotate(35deg) translate(80px, -120px);
+    }
+}
+
+/* ==================== 右侧《主播女孩重度依赖》风弹窗 ==================== */
+.side-panel.right {
+    position: absolute;
+    right: 80px;
+    top: 160px;
+    width: 400px;
+    background: #fff8f0;
+    border: 4px solid #ff99cc;
+    border-radius: 8px;
+    box-shadow: 0 0 0 6px #000000, 0 0 0 10px #ff66aa;
+    padding: 20px 25px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+.side-panel.right.show {
+    display: flex;
 }
 
 .chat-invite h2 {
-    font-size: 22px;
-    color: #6b7eb3;
-    margin-bottom: 40px;
+    font-size: 21px;
+    color: #ff3399;
+    margin-bottom: 35px;
+    text-align: center;
+    text-shadow: 2px 2px 0 #fff;
     line-height: 1.4;
 }
 
 .invite-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    gap: 20px;
+    width: 100%;
 }
 
 .invite-yes, .invite-no {
-    padding: 14px 32px;
+    flex: 1;
+    padding: 14px;
     font-size: 17px;
-    border: none;
-    border-radius: 30px;
+    border: 3px solid #000;
+    background: #fff;
+    color: #000;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0 #000;
 }
 
-.invite-yes {
-    background: #a8c0e8;
-    color: white;
+.invite-yes:hover, .invite-no:hover {
+    background: #ff99cc;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #000;
 }
 
-.invite-no {
-    background: #f0e6ff;
-    color: #7a9ac9;
+.invite-yes:active, .invite-no:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
 }
 
-/* 飘字 toast */
-#toast-container {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    pointer-events: none;
-}
-
-.toast {
-    background: rgba(255,255,255,0.9);
-    color: #7a9ac9;
-    padding: 12px 24px;
-    border-radius: 30px;
-    box-shadow: 0 8px 25px rgba(120,140,200,0.3);
-    font-size: 18px;
-    white-space: nowrap;
-    animation: floatUp 3.5s forwards;
-    opacity: 0;
-}
-
-@keyframes floatUp {
-    0% { opacity: 0; transform: translate(-50%, 20px); }
-    20% { opacity: 1; transform: translate(-50%, 0); }
-    80% { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%, -80px); }
-}
-
-/* 毛玻璃面板 */
-.glass-panel {
-    background: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.6);
-    box-shadow: 0 15px 35px rgba(120, 140, 200, 0.25);
-}
-
-/* 置物栏 */
-.eraser-shelf {
-    margin-top: auto;
-    padding-top: 20px;
-    border-top: 2px dashed #c0c0e0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-}
-
-.eraser {
-    font-size: 48px;
-    cursor: grab;
-    transition: transform 0.2s;
-    user-select: none;
-}
-
-.eraser:active {
-    cursor: grabbing;
-    transform: scale(1.3) rotate(15deg);
-}
-
-.shelf-label {
-    font-size: 13px;
-    color: #999;
-    letter-spacing: 1px;
-}
-
-/* 擦除动画 */
-.glass-panel.erasing {
-    transition: all 1.2s ease-out;
-    opacity: 0.15;
-    filter: blur(8px);
-}
-
-/* 吐槽气泡 */
+/* ==================== 吐槽气泡 ==================== */
 .bubble {
     position: absolute;
-    background: rgba(255,255,255,0.95);
-    color: #7a9ac9;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    white-space: nowrap;
+    background: #fff8e8;
+    color: #ff3399;
+    padding: 12px 24px;
+    border: 3px solid #000;
+    border-radius: 4px;
+    font-size: 15px;
+    box-shadow: 4px 4px 0 #000;
     pointer-events: none;
     animation: bubbleFloat 4s forwards;
+    z-index: 30;
 }
 
 @keyframes bubbleFloat {
-    0%   { opacity: 0; transform: translateY(10px); }
-    15%  { opacity: 1; transform: translateY(0); }
-    85%  { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-80px); }
+    0%   { opacity: 0; transform: translateY(40px); }
+    25%  { opacity: 1; transform: translateY(-10px); }
+    80%  { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-100px); }
 }

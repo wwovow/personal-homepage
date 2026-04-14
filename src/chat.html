@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>昀 - 数字分身</title>
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+    <div class="phone-frame">
+        <!-- 手机顶部状态栏 -->
+        <div class="phone-header">
+            <div class="time">19:88</div>
+            <div class="status-icons">◉◉◉</div>
+        </div>
+
+        <!-- 聊天标题栏 -->
+        <div class="chat-title">
+            <button id="back-btn" class="back-button">←</button>
+            <div class="chat-avatar">
+                <img src="assets/849AC51B15741B539BB8E3DD73535B64.png" alt="昀">
+            </div>
+            <div>
+                <h2>昀</h2>
+                <p>在线 · 正在学AI中 ww</p>
+            </div>
+        </div>
+
+        <!-- 聊天消息区域 -->
+        <div id="chat-window" class="chat-window">
+            <div id="messages"></div>
+        </div>
+
+        <!-- 输入栏 -->
+        <div class="chat-input-area">
+            <input type="text" id="message-input" placeholder="想跟昀说点什么...">
+            <button id="send-button">发送</button>
+        </div>
+    </div>
+
+    <script src="js/chat.js"></script>
+</body>
+</html>
