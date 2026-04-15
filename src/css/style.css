@@ -12,6 +12,7 @@ body {
     color: #555;
 }
 
+/* ==================== 主容器 - 手机适配 ==================== */
 .player-main {
     max-width: 1100px;
     margin: 0 auto;
@@ -187,11 +188,11 @@ body {
     display: flex;
 }
 
-/* ==================== 歪着的小猫爪（放在左箭头左下角） ==================== */
+/* ==================== 歪着的小猫爪（左箭头左下角） ==================== */
 .cat-paw-wrapper {
     position: absolute;
-    left: 360px;     /* 调整这个数值可以左右移动 */
-    bottom: 85px;    /* 调整这个数值可以上下移动 */
+    left: 118px;
+    bottom: 92px;
     z-index: 25;
 }
 
@@ -199,7 +200,7 @@ body {
     font-size: 48px;
     cursor: pointer;
     transition: all 0.35s ease;
-    transform: rotate(-25deg);   /* 歪着摆放 */
+    transform: rotate(-25deg);
     user-select: none;
 }
 
@@ -212,32 +213,18 @@ body {
     transform: rotate(-40deg) scale(0.85);
 }
 
-.paw-label {
-    font-size: 13px;
-    color: #b38cc6;
-    letter-spacing: 1px;
-}
-
 /* 面板被拍飞动画 */
 .glass-panel.paw-away {
     animation: pawFlyAway 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 @keyframes pawFlyAway {
-    0% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg) translateY(0);
-    }
-    40% {
-        transform: scale(1.05) rotate(8deg);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.6) rotate(35deg) translate(80px, -120px);
-    }
+    0% { opacity: 1; transform: scale(1) rotate(0deg) translateY(0); }
+    40% { transform: scale(1.05) rotate(8deg); }
+    100% { opacity: 0; transform: scale(0.6) rotate(35deg) translate(80px, -120px); }
 }
 
-/* ==================== 右侧《主播女孩重度依赖》风弹窗 ==================== */
+/* ==================== 右侧邀请弹窗 ==================== */
 .side-panel.right {
     position: absolute;
     right: 80px;
@@ -252,7 +239,6 @@ body {
     flex-direction: column;
     align-items: center;
     z-index: 20;
-    font-family: 'Microsoft YaHei', sans-serif;
 }
 
 .side-panel.right.show {
@@ -317,4 +303,75 @@ body {
     25%  { opacity: 1; transform: translateY(-10px); }
     80%  { opacity: 1; }
     100% { opacity: 0; transform: translateY(-100px); }
+}
+
+/* ==================== 手机端适配（最重要！） ==================== */
+@media (max-width: 768px) {
+    .player-main {
+        padding: 20px 15px;
+    }
+
+    .song-title {
+        font-size: 32px;
+    }
+
+    .vinyl {
+        width: 200px;
+        height: 200px;
+    }
+
+    .avatar-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .controls {
+        gap: 25px;
+    }
+
+    .control-btn {
+        width: 58px;
+        height: 58px;
+        font-size: 26px;
+    }
+
+    /* 左侧面板在手机上居中显示 */
+    .glass-panel {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 380px;
+        margin: 20px auto;
+    }
+
+    /* 猫爪在手机上调整位置 */
+    .cat-paw-wrapper {
+        left: 95px;
+        bottom: 78px;
+    }
+
+    /* 右侧弹窗在手机上居中 */
+    .side-panel.right {
+        position: relative;
+        right: 0;
+        top: 0;
+        width: 92%;
+        max-width: 380px;
+        margin: 20px auto;
+        border-radius: 16px;
+    }
+}
+
+/* 超小屏幕额外优化 */
+@media (max-width: 480px) {
+    .controls {
+        gap: 20px;
+    }
+
+    .control-btn {
+        width: 54px;
+        height: 54px;
+        font-size: 24px;
+    }
 }
