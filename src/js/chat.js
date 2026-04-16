@@ -108,19 +108,27 @@ messageInput.addEventListener('keypress', (e) => {
   }
 });
 
-// 快速按钮功能
-const quickButtons = document.querySelectorAll('.quick-btn');
-quickButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
+const quickButtonsContainer = document.querySelector('.quick-buttons');
+
+quickButtonsContainer.addEventListener('click', (e) => {
+    const btn = e.target.closest('.quick-btn');
+    if (!btn) return;
+
     const question = btn.getAttribute('data-question');
     messageInput.value = question;
     sendMessage();
-    
-    // 平滑消失动画
-    btn.style.transition = 'opacity 0.3s ease-out';
-    btn.style.opacity = '0';
+
+    // 👇 关键：先锁定当前高度
+    const height = quickButtonsContainer.scrollHeight;
+    quickButtonsContainer.style.height = height + 'px';
+
+    // 强制浏览器应用这个高度（触发重排）
+    quickButtonsContainer.offsetHeight;
+
+    // 👇 再加动画类
+    quickButtonsContainer.classList.add('hide');
+
     setTimeout(() => {
-      btn.style.display = 'none';
-    }, 300);
-  });
+        quickButtonsContainer.style.display = 'none';
+    }, 500);
 });

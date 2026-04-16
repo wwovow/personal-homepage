@@ -29,21 +29,28 @@
         <!-- 消息区域 -->
 <div id="chat-window" class="chat-window">
     <div id="messages"></div>
-    
-    <!-- 快速提问按钮 -->
-    <div class="quick-buttons" id="quick-buttons">
-        <button class="quick-btn" data-question="你是谁">你是谁？</button>
-        <button class="quick-btn" data-question="你现在做得怎么样了">做得怎么样了？</button>
-        <button class="quick-btn" data-question="该怎么联系你">该怎么联系你？</button>
-    </div>
 </div>
+    
+<!-- 快速按钮 + 输入栏（固定在底部） -->
+<div class="input-section">
+
+    <!-- 快速按钮 -->
+    <div class="quick-buttons-wrapper" id="quick-wrapper">
+      <div class="quick-buttons" id="quick-buttons">
+         <button class="quick-btn" data-question="你是谁">你是谁？</button>
+         <button class="quick-btn" data-question="你现在做得怎么样了">做得怎么样了？</button>
+         <button class="quick-btn" data-question="该怎么联系你">该怎么联系你？</button>
+      </div>
+    </div>
+
+
 
         <!-- 输入栏 -->
         <div class="chat-input-area">
-            <input type="text" id="message-input" placeholder="想跟昀说点什么...">
+            <input type="text" id="message-input" placeholder="快来发现意想不到的小惊喜w">
             <button id="send-button">发送</button>
         </div>
-    </div>
+</div>
 
     <script src="js/chat.js"></script>
 </body>

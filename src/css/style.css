@@ -191,8 +191,8 @@ body {
 /* ==================== 歪着的小猫爪（左箭头左下角） ==================== */
 .cat-paw-wrapper {
     position: absolute;
-    left: 118px;
-    bottom: 92px;
+    left: 340px;
+    bottom: 102px;
     z-index: 25;
 }
 
@@ -243,6 +243,19 @@ body {
 
 .side-panel.right.show {
     display: flex;
+}
+
+/* 手机端让邀请弹窗居中显示在唱片位置 */
+@media (max-width: 768px) {
+    .side-panel.right {
+        position: absolute;
+        left: 50%;
+        top: 280px;           /* 放在唱片下方一点 */
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 340px;
+        right: auto;
+    }
 }
 
 .chat-invite h2 {
