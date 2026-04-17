@@ -1,21 +1,34 @@
-// File: /personal-homepage/personal-homepage/src/js/chat.js
+const keywordCounter = {
+    contact: 0,  // 联系
+    identity: 0  // 你是谁
+};
 
-document.addEventListener('DOMContentLoaded', function() {
-    const chatInput = document.getElementById('chat-input');
-    const chatButton = document.getElementById('chat-button');
-    const chatWindow = document.getElementById('chat-window');
+function checkSpecialTrigger(message) {
+    // 👉 统一转小写（防止大小写问题）
+    const text = message.toLowerCase();
 
-    chatButton.addEventListener('click', function() {
-        const message = chatInput.value.trim();
-        if (message) {
-            addMessageToChat('You', message);
-            chatInput.value = '';
-            // Simulate a response from the digital avatar
-            setTimeout(() => {
-                addMessageToChat('Avatar', 'This is a response to: ' + message);
-            }, 1000);
+    // ===== 检测“联系” =====
+    if (text.includes("联系") || text.includes("加你") || text.includes("怎么找你")) {
+        keywordCounter.contact++;
+
+        if (keywordCounter.contact >= 3) {
+            return "？这么想加？就不告诉你~就不告诉你~~";
         }
-    });
+    }
+
+    // ===== 检测“你是谁” =====
+    if (text.includes("你是谁")) {
+        keywordCounter.identity++;
+
+        if (keywordCounter.identity >= 2) {
+            return "还问！那现在偶素古娜拉·昀咯！什么你不知道古娜拉，那'古娜拉黑暗之神'你肯定有印象吧~";
+        }
+    }
+
+    return null; // 没触发
+}
+
+
 
     function addMessageToChat(sender, message) {
         const messageElement = document.createElement('div');
@@ -24,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatWindow.appendChild(messageElement);
         chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
     }
-});
+;
 
 const chatMessages = document.getElementById('messages');
 const messageInput = document.getElementById('message-input');
@@ -65,7 +78,11 @@ function addMessage(text, isUser) {
   chatMessages.appendChild(messageDiv);
   
   // 自动滚到最下面
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  const chatWindow = document.querySelector('.chat-window');
+  chatWindow.scrollTo({
+  top: chatWindow.scrollHeight,
+  behavior: 'smooth'
+});
 }
 
 // 获取机器人的回复
@@ -86,14 +103,22 @@ function getBotReply(userMessage) {
 // 发送消息
 function sendMessage() {
   const message = messageInput.value.trim();
-  
   if (message === '') return;
-  
-  // 添加用户消息
+
+  // 👉 先加用户消息
   addMessage(message, true);
   messageInput.value = '';
-  
-  // 延迟显示机器人回复（更自然）
+
+  // 👉 检测特殊触发
+  const specialReply = checkSpecialTrigger(message);
+  if (specialReply) {
+    setTimeout(() => {
+      addMessage(specialReply, false);
+    }, 300);
+    return;
+  }
+
+  // 👉 正常回复
   setTimeout(() => {
     const botReply = getBotReply(message);
     addMessage(botReply, false);
